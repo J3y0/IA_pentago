@@ -12,7 +12,11 @@ You play turn by turn. During his turn, each player has to put a marble on the b
 
 # In the program
 
-First, to compile this program, copy this line in your terminal: ```gcc -W -Wall -std=c99 -O3 -o pentago_ia pentago.c```
+First, to compile this program, copy this line in your terminal: 
+
+```
+gcc -W -Wall -std=c99 -O3 -o pentago_ia pentago.c
+```
 
 In this program, you play against a AI which is going to start.
 
@@ -31,4 +35,16 @@ Your rotation (format: 'sub-board direction'):
 ```
 Like above, you are going to enter the sub-board you want to rotate (from 0 to 3 where 0 is the one at the top left and 3 is the one at the bottom right) by the direction of your choice (1 for 90 degrees and -1 for -90 degrees). (Example: I want to rotate the sub-board at the top right by 90 degrees, I will enter: `1 1`).
 
-I hope it's clear.
+# How I did it
+
+The AI uses the Alpha_beta algorithm. In order to work, the algorithm try to create the pattern evaluated as the best, or the one that gives the most advantage in the current position.
+
+This is why, I have an array of pattern (it is short because I check for symmetry and color symmetry too) where:
+
+- 0 is an empty position
+- 1 is a position owned by the player who is playing
+- -1 is a position owned by the opponent
+
+and at each pattern, an amount of points is associated: 100 being the highest score and then -100 being the lowest score.
+
+Once these patterns are defined, the AI computes each position and stores the move that gives the best advantage for him. Further the game goes, bigger is the depth of the algorithm (that means the algorithm predicts more moves).
